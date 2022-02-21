@@ -2,7 +2,7 @@
 
 Team H members:  
 Nguyen, Trung Minh  
-Nguyen, Justin
+Nguyen, Justin  
 Oberhelman, Andres William  
 Opial, Blake  
 Pardo, Devin Jakob  
