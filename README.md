@@ -5,4 +5,4 @@ Nguyen, Trung Minh
 Nguyen, Justin  
 Oberhelman, Andres William  
 Opial, Blake  
-Pardo, Devin Jakob  check check
+Pardo, Devin Jakob  
