@@ -4,7 +4,7 @@
   "description": "ColumbusList website to assist Columbus Univeristy student in buying and selling products",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/trungnguyen10/CSC4330ProjectGroupH#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.14"
   },
   "devDependencies": {
