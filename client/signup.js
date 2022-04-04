@@ -22,7 +22,7 @@ function submitForm()
     alert("Password does not match");
   }
   const options = {
-    url: 'localhost:3000/api/user/login',
+    url: 'localhost:3000/api/user/signup',
     method: 'POST',
     headers: {
       'Accept': 'application/json',
