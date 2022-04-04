@@ -17,6 +17,7 @@
     },
     "homepage": "https://github.com/trungnguyen10/CSC4330ProjectGroupH#readme",
     "dependencies": {
+        "axios": "^0.26.1",
         "bcryptjs": "^2.4.3",
         "dotenv": "^16.0.0",
         "ejs": "^3.1.6",
@@ -25,7 +26,8 @@
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.13.14",
         "react": "^18.0.0",
-        "react-dom": "^18.0.0"
+        "react-dom": "^18.0.0",
+        "requirejs": "^2.3.6"
     },
     "devDependencies": {
         "nodemon": "^1.11.1"

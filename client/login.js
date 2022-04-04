@@ -1,4 +1,4 @@
-const axios = require('axios');
+const Axios = require('axios');
 function submitForm()
 {
   console.log("Submitting the form");
