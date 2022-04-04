@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<style> 
+    body {
+    background-color: #344a72;
+    font-family: "Roboto", sans-serif;
+  }
+  .signup-box {
+    width: 360px;
+    height: 520px;
+    margin: auto;
+    background-color: white;
+    border-radius: 3px;
+  }
+    .login-box {
+        width: 360px;
+        height: 350px;
+        margin: auto;
+        border-radius: 3px;
+        background-color: white;
+    }
+    h1 {
+    text-align: center;
+    padding-top: 15px;
+    font-family: "Times New Roman", "Times", "serif";
+  }
+  h2 {
+    text-align: center;
+  }
+
+  h4 {
+    text-align: center;
+  }
+  
+  form {
+    width: 300px;
+    margin-left: 20px;
+  }
+  
+  form label {
+    display: flex;
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  
+  form input {
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border: 1px solid gray;
+    border-radius: 6px;
+    outline: none;
+  }
+  input[type="button"] {
+    width: 320px;
+    height: 35px;
+    margin-top: 20px;
+    border: none;
+    background-color: #49c1a2;
+    color: white;
+    font-size: 18px;
+  }
+  p {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 15px;
+  }
+  .para-2 {
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    margin-top: -10px;
+  }
+  .para-2 a {
+    color: #49c1a2;
+  }
+</style>
+<title>Login</title>
+<body>
+    <div class="login-box">
+        <h1><img src="CSU_Logo.png" alt="Columbus University Store"></img></h1>
+        <h2>Login</h2>
+        <form>
+            
+            <label>Email</label>
+            <input type="email" placeholder="" id="email">
+            <label>Password</label>
+            <input type="password" placeholder="" id="password">
+            
+            <input type="button" value="Submit"id="submit">
+            
+        </form>
+    </div>
+    <p style="color:white">Need an account?<a style="color:#00FFFF" href="./signup.ejs">Sign up here</a> </p>
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link= rel="stylesheet" href ="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap">
+    <script type="text/javascript" src="/login.js"></script>
+</body>
+</html>
