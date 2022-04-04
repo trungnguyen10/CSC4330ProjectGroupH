@@ -12,7 +12,7 @@ function submitForm()
   {}
   console.log(datajs);
   const options = {
-    url: 'http://localhost:3000/api/login',
+    url: 'localhost:3000/api/user/login',
     method: 'POST',
     headers: {
       'Accept': 'application/json',
