@@ -26,10 +26,13 @@ const userSchema = mongoose.Schema({
     type: String,
     required: [true, "Please confirm your password"],
     validate: {
-      validator: (val) => val === this.password,
+      validator: function (value) {
+        return value === this.password;
+      },
       message: "Passwords are not matched",
     },
   },
+  passwordChangedAt: Date,
 });
 
 // middleware to hash the password before saving the document to the database
@@ -50,6 +53,18 @@ userSchema.methods.isPasswordCorrect = function (
   userPassword
 ) {
   return bcrypt.compare(candidatePassword, userPassword);
+};
+
+//
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
+    return JWTTimestamp < changedTimestamp;
+  }
+  return false;
 };
 
 const User = mongoose.model("User", userSchema);
