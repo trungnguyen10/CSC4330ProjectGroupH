@@ -22,9 +22,9 @@ app.use(helmet());
 app.use(express.json());
 
 // ROUTES
-app.get("/", (req, res) => {
-  res.status(200).render("base");
-});
+// app.get("/", (req, res) => {
+//   res.status(200).render("base");
+// });
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/listing", listingRoute);
 
