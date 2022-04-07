@@ -9,6 +9,27 @@ const signToken = function (id) {
   });
 };
 
+//helper function to send the response with the token
+const respondWithToken = function (statusCode, user, res) {
+  const token = signToken(user._id);
+
+  const cookieOptions = {
+    expire:
+      new Date(Date.now()) +
+      process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+    secure: process.env.NODE_ENV === "development" ? false : true,
+    httpOnly: true,
+  };
+  res.cookie("jwt", token, cookieOptions);
+
+  user.password = undefined;
+  res.status(statusCode).json({
+    status: "success",
+    token,
+    data: { user },
+  });
+};
+
 exports.signup = async function (req, res, next) {
   try {
     // create new user document
@@ -23,15 +44,8 @@ exports.signup = async function (req, res, next) {
     });
 
     // sign the token and let the user be logged in
-    const token = signToken(newUser._id);
-
-    res.status(201).json({
-      status: "success",
-      token,
-      data: {
-        user: newUser,
-      },
-    });
+    respondWithToken(201, newUser, res);
+    next();
   } catch (err) {
     res.status(400).json({
       status: "fail",
@@ -53,11 +67,8 @@ exports.login = async function (req, res, next) {
       return next(new Error("Invalid email or password!"));
 
     // 3- If everything is ok, sign and send back the token for logging in
-    const token = signToken(user._id);
-    res.status(200).json({
-      status: "success",
-      token,
-    });
+    respondWithToken(200, user, res);
+    next();
   } catch (err) {
     res.status(401).json({
       status: "fail",
@@ -119,11 +130,8 @@ exports.updatePassword = async function (req, res, next) {
     await user.save();
 
     // 3- sign new token and send the response
-    const token = signToken(user._id);
-    res.status(201).json({
-      status: "success",
-      token,
-    });
+    respondWithToken(201, user, res);
+    next();
   } catch (err) {
     console.log(err);
     res.status(401).json({
