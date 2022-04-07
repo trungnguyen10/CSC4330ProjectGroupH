@@ -47,6 +47,16 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+// middleware to update the timestamp for when change password
+userSchema.pre("save", function (next) {
+  if (!this.isModified("password" || this.isNew)) return next();
+
+  // update timestamp: updating to database is slower than issuing token
+  // substract 5000 milisecond for this difference
+  this.passwordChangedAt = Date.now() - 5000;
+  next();
+});
+
 // helper function to check if password is correct
 userSchema.methods.isPasswordCorrect = function (
   candidatePassword,

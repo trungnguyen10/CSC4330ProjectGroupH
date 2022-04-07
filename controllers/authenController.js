@@ -93,8 +93,39 @@ exports.protect = async function (req, res, next) {
       );
     }
 
+    // Grant access after verification
+    req.user = decodedUser;
     next();
   } catch (err) {
+    res.status(401).json({
+      status: "fail",
+      message: err.toString(),
+    });
+  }
+};
+
+exports.updatePassword = async function (req, res, next) {
+  try {
+    // 1- get user from database
+    const user = await User.findById(req.user._id).select("+password");
+
+    // 2- check current password
+    if (
+      !(await user.isPasswordCorrect(req.body.currentPassword, user.password))
+    )
+      return next(new Error("Your current password is not correct"));
+    user.password = req.body.newPassword;
+    user.passwordConfirm = req.body.passwordConfirm;
+    await user.save();
+
+    // 3- sign new token and send the response
+    const token = signToken(user._id);
+    res.status(201).json({
+      status: "success",
+      token,
+    });
+  } catch (err) {
+    console.log(err);
     res.status(401).json({
       status: "fail",
       message: err.toString(),

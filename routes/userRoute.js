@@ -4,9 +4,12 @@ const authenController = require(`${__dirname}/../controllers/authenController`)
 
 const router = express.Router();
 
-router.route("/signup").get().post(authenController.signup);
+router.route("/signup").post(authenController.signup);
 
-router.route("/login").get().post(authenController.login);
+router.route("/login").post(authenController.login);
+router
+  .route("/updatepassword")
+  .patch(authenController.protect, authenController.updatePassword);
 
 router.route("/").get(userController.getUser);
 
