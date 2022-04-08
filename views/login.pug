@@ -1,0 +1,21 @@
+doctype html
+head
+  link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap')
+  link(rel='stylesheet' href='./css/style.css')
+  title Login
+body
+  div.login-box
+    h1
+      img(src='./img/CSU_Logo.png' alt='Columbus University Store' style='width:360px; height:120px')
+      h1(style='color: #000229; position: relative; top: -90px; left: -50px; ') Store
+    h2(style='position: relative; top: -90px;') Login
+    form.form(style='position: relative; top: -90px;')
+      label Email
+      input#email(type='email' placeholder='')
+      label Password
+      input#password(type='password' placeholder='')
+      button Submit
+  p(style='color:white') Need an account?
+    a(style='color:#00FFFF' href='./signup') Sign up here
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.js') 
+script(src='./js/login.js')
