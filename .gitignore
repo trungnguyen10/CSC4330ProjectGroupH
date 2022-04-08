@@ -131,3 +131,6 @@ dist
 
 #.vscode setting directories
 .vscode/
+
+#MacOS DS file
+.DS_Store
