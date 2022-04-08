@@ -61,6 +61,7 @@ app.use("/api/v1/listing", listingRoute);
 //   });
 
 app.all("*", (req, res, next) => {
+  console.log(req.originalUrl);
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 

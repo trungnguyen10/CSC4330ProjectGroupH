@@ -62,7 +62,6 @@ exports.login = catchAsync(async function (req, res, next) {
 
   // 3- If everything is ok, sign and send back the token for logging in
   respondWithToken(200, user, res);
-  next();
 });
 
 exports.protect = catchAsync(async function (req, res, next) {
@@ -140,7 +139,7 @@ exports.isLoggedIn = async function (req, res) {
       return false;
     }
   } catch (err) {
-    console.log(err);
+    console.log("IS LOGGED IN" + err);
     return false;
   }
 };

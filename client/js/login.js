@@ -11,11 +11,11 @@ const login = async (email, password) => {
 
     if (result.data.status === "success") {
       window.setTimeout(() => {
-        location.assign("/");
+        location.assign("/homepage");
       }, 1500);
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.response);
   }
 };
 
