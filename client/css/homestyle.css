@@ -1,0 +1,147 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.Header_box{
+    position: fixed;
+    overflow: visible;
+    background-color: #344a72; 
+    padding: none;
+    height: 50px;
+    width: 100%;
+    min-width: 1080px;
+}
+.Header_box a {
+    overflow: visible;
+    font-family: "Arial Black", "Arial", "sans seriff";
+    color:  white;
+    text-decoration: none;
+    font-size: 30px;
+    padding: 0px 30px 0px 30px;
+}
+.Header_box input{
+    overflow: visible;
+    position: absolute;
+    top: 5px;
+    background-color:  grey;
+    color: white;
+    font-family: "Arial Black", "Arial", "sans seriff";
+    font-size: 17px;
+    border-radius: 10px;
+    height: 40px;
+    border: none;
+    padding: 0px 180px 0px 40px;
+    z-index: -1;
+}
+
+.Header_box a:hover {
+    color: #1B95CE;
+}
+input::placeholder{
+    color: white;
+    position: relative;
+    font-family: "Arial Black", "Arial", "sans seriff";
+    font-size: 17px;
+    text-align: left;
+    top: 3px;
+}
+
+.Account-Menu {
+    display: inline-block;
+    position: absolute;
+    overflow: visible;
+    right: 10px;
+}
+.Account-Menu img{
+    color: white;
+    float: right;
+    mix-blend-mode: multiply;
+    height: 50px;
+    width: 50px;
+}
+.Drop-Button li {
+    position: relative;
+    float: bottom;
+    top: 35px;
+    background-color: #063C54;
+    font-family: "Arial Black", "Arial", "sans seriff";
+    font-size: 30px;
+    color: white;
+    border: solid;
+    border-color: white;
+    border-width: 2px;
+    min-height: 30px;
+    min-width: 350px;
+    padding: 0px 20px 0px 20px;
+    list-style: none;
+    z-index: 2;
+}
+.Drop-Button {
+    display: none;
+    right: 0;
+    z-index: 1;
+}
+
+.Account-Menu:hover .Drop-Button {
+    display: block;
+}
+.Drop-Button li:hover {
+    background-color: #095274;
+    color: #1B95CE;
+}
+
+.Listing-Zone {
+    position: relative;
+    top: 50px;
+    background-color: white;
+    overflow: visible;
+    width: 100%;
+    height: 2200px;
+    z-index: -2;
+}
+.Listing-Zone button {
+   position: relative;
+   float: left;
+   background-color: #CBCBCB;
+   border: solid;
+   border-color: black;
+   border-width: 2px;
+   border-radius: 5px;
+   overflow: visible;
+
+   height: 400px;
+   width: 400px;
+   padding-left: 10px 30px 10px 30px;
+   margin: 5px;
+}
+.Listing-Zone button h1 {
+   position: absolute;
+   top: 0px;
+   left: 20px;
+   font-family: "Arial Black", "Arial", "sans seriff";
+   font-size: 27px;
+   color: black;
+}
+.Listing-Zone button p {
+   position: absolute;
+   top: 50px;
+   left: 20px;
+   overflow-wrap: break-word;
+   font-family: "Arial Black", "Arial", "sans seriff";
+   font-size: 15px;
+   width: 340px;
+   height: -200px;
+   color: black;
+   text-align: left;
+}
+.Listing-Zone button img {
+    position: absolute;
+    background-color: black;
+    color: white;
+    width: 360px;
+    height: 240px;
+    bottom: 20px;
+    left: 20px;
+}

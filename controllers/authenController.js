@@ -62,8 +62,15 @@ exports.login = catchAsync(async function (req, res, next) {
 
   // 3- If everything is ok, sign and send back the token for logging in
   respondWithToken(200, user, res);
-  next();
 });
+
+exports.logout = function (req, res) {
+  res.cookie("jwt", "LoggedOut", {
+    expire: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: "success" });
+};
 
 exports.protect = catchAsync(async function (req, res, next) {
   let token;
@@ -102,7 +109,7 @@ exports.updatePassword = catchAsync(async function (req, res, next) {
 
   // 2- check current password
   if (!(await user.isPasswordCorrect(req.body.currentPassword, user.password)))
-    return next(new Error("Your current password is not correct"));
+    return next(new AppError("Your current password is not correct", 401));
   user.password = req.body.newPassword;
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
@@ -140,7 +147,7 @@ exports.isLoggedIn = async function (req, res) {
       return false;
     }
   } catch (err) {
-    console.log(err);
+    console.log("IS LOGGED IN" + err);
     return false;
   }
 };

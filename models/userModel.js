@@ -49,7 +49,7 @@ userSchema.pre("save", async function (next) {
 
 // middleware to update the timestamp for when change password
 userSchema.pre("save", function (next) {
-  if (!this.isModified("password" || this.isNew)) return next();
+  if (!this.isModified("password") || !this.isNew) return next();
 
   // update timestamp: updating to database is slower than issuing token
   // substract 5000 milisecond for this difference
@@ -65,7 +65,7 @@ userSchema.methods.isPasswordCorrect = function (
   return bcrypt.compare(candidatePassword, userPassword);
 };
 
-//
+// helper function to check if password has changed after the token was issued
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
