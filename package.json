@@ -19,15 +19,20 @@
     "dependencies": {
         "axios": "^0.26.1",
         "bcryptjs": "^2.4.3",
+        "cookie-parser": "^1.4.6",
         "dotenv": "^16.0.0",
+        "ejs": "^3.1.6",
         "express": "^4.17.3",
+        "git": "^0.1.5",
+        "helmet": "^3.23.3",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.13.14",
-        "node": "^17.7.2",
+        "pug": "^3.0.2",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0",
         "requirejs": "^2.3.6"
     },
     "devDependencies": {
         "nodemon": "^1.11.1"
     }
-   
 }

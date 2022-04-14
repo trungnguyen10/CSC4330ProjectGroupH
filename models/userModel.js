@@ -26,10 +26,13 @@ const userSchema = mongoose.Schema({
     type: String,
     required: [true, "Please confirm your password"],
     validate: {
-      validator: (val) => val === this.password,
+      validator: function (value) {
+        return value === this.password;
+      },
       message: "Passwords are not matched",
     },
   },
+  passwordChangedAt: Date,
 });
 
 // middleware to hash the password before saving the document to the database
@@ -44,12 +47,34 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+// middleware to update the timestamp for when change password
+userSchema.pre("save", function (next) {
+  if (!this.isModified("password") || !this.isNew) return next();
+
+  // update timestamp: updating to database is slower than issuing token
+  // substract 5000 milisecond for this difference
+  this.passwordChangedAt = Date.now() - 5000;
+  next();
+});
+
 // helper function to check if password is correct
 userSchema.methods.isPasswordCorrect = function (
   candidatePassword,
   userPassword
 ) {
   return bcrypt.compare(candidatePassword, userPassword);
+};
+
+//
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
+    return JWTTimestamp < changedTimestamp;
+  }
+  return false;
 };
 
 const User = mongoose.model("User", userSchema);
