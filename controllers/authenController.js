@@ -64,6 +64,14 @@ exports.login = catchAsync(async function (req, res, next) {
   respondWithToken(200, user, res);
 });
 
+exports.logout = function (req, res) {
+  res.cookie("jwt", "LoggedOut", {
+    expire: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: "success" });
+};
+
 exports.protect = catchAsync(async function (req, res, next) {
   let token;
   // 1- get the token, check if it exists
@@ -101,7 +109,7 @@ exports.updatePassword = catchAsync(async function (req, res, next) {
 
   // 2- check current password
   if (!(await user.isPasswordCorrect(req.body.currentPassword, user.password)))
-    return next(new Error("Your current password is not correct"));
+    return next(new AppError("Your current password is not correct", 401));
   user.password = req.body.newPassword;
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
