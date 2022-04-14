@@ -74,15 +74,16 @@ exports.logout = function (req, res) {
 
 exports.protect = catchAsync(async function (req, res, next) {
   let token;
+
   // 1- get the token, check if it exists
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
     token = req.headers.authorization.split(" ")[1];
-  } else if (req.cookie.jwt) token = req.cookie.jwt;
+  } else if (req.cookies.jwt) token = req.cookies.jwt;
   // if token exists
-  if (!token) return next(new Error("You are not logged in!"));
+  if (!token) return next(new AppError("You are not logged in!"));
 
   // 2- verification token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
@@ -94,7 +95,7 @@ exports.protect = catchAsync(async function (req, res, next) {
   // 4- check if user change password after token was signed
   if (decodedUser.changedPasswordAfter(decoded.iat)) {
     return next(
-      new Error("Password has been recently changed! Please log in again!")
+      new AppError("Password has been recently changed! Please log in again!")
     );
   }
 

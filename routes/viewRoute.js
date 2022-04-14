@@ -3,14 +3,31 @@ const authenController = require(`${__dirname}/../controllers/authenController`)
 const viewController = require(`${__dirname}/../controllers/viewController`);
 const router = express.Router();
 
-router.route("/").get(async (req, res) => {
+const isRedirected = async function (req, res) {
   const isLoggedIn = await authenController.isLoggedIn(req, res);
-  if (isLoggedIn) viewController.getHomePage(req, res);
-  else viewController.getLoginForm(req, res);
+  if (isLoggedIn) {
+    res.redirect("http://127.0.0.1:3000/homepage");
+    return true;
+  } else return false;
+};
+
+router.route("/").get(async (req, res) => {
+  const redirected = await isRedirected(req, res);
+  if (!redirected) viewController.getLoginForm(req, res);
 });
 
-router.route("/login").get(viewController.getLoginForm);
-router.route("/signup").get(viewController.getSignupForm);
-router.route("/homepage").get(viewController.getHomePage);
+router.route("/login").get(async (req, res) => {
+  const redirected = await isRedirected(req, res);
+  if (!redirected) viewController.getLoginForm(req, res);
+});
+router.route("/signup").get(async (req, res) => {
+  const redirected = await isRedirected(req, res);
+  if (!redirected) viewController.getSignupForm(req, res);
+});
+router.route("/homepage").get(async (req, res) => {
+  const isLoggedIn = await authenController.isLoggedIn(req, res);
+  if (!isLoggedIn) res.redirect("http://127.0.0.1:3000/login");
+  else viewController.getHomePage(req, res);
+});
 
 module.exports = router;

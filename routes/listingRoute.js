@@ -6,12 +6,14 @@ const router = express.Router();
 router
   .route("/")
   .get(authenController.protect, listingController.getAllListings)
-  .post(listingController.createListing);
+  .post(authenController.protect, listingController.createListing);
 
 // router
 //   .route("/sortByTime")
 //   .get(authenController.protect, sort(listingController.getAllListings));
-router.route("/:id").get(listingController.getListing);
-// .patch(listingController.updateListing)
-// .delete(listingController.deleteListing);
+router
+  .route("/:id")
+  .get(listingController.getListing)
+  .patch(listingController.updateListing)
+  .delete(listingController.deleteListing);
 module.exports = router;
