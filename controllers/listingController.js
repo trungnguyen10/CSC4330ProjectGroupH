@@ -44,7 +44,11 @@ exports.getListing = async (req, res) => {
 exports.createListing = async (req, res) => {
   try {
     console.log(req.user);
-    const newListing = await Listing.create(req.body);
+
+    const listingInfo = {...req.body};
+    listingInfo.belongTo = req.user._id;
+
+    const newListing = await Listing.create(listingInfo);
 
     res.status(201).json({
       status: "success",
@@ -60,6 +64,33 @@ exports.createListing = async (req, res) => {
   }
 };
 
-exports.updateListing = function (req, res) {};
+exports.updateListing = async (req, res) => {
+  try{
+    console.log(req.user);
+    const item = await Listing.findById(req.params.id);
+    
+    if(req.user._id == req.body.belongTo){
+    Object.assign(item, req.body);
+    item.save();
+    res.send({data: item});}
+    else(res.status(404).send({ error: "You are not the Owner of this Listing."}))
+    }
+  catch{
+    res.status(404).send({ error: "Listing Does Not Exist"});
+  }
+};
 
-exports.deleteListing = function (req, res) {};
+exports.deleteListing = async (req, res) => {
+  try{
+    console.log(req.user);
+    const listing = await Listing.findById(req.params.id);
+
+    if(req.user._id == req.body.belongTo){
+    await listing.remove();
+    
+    res.send({data: true});
+    }
+  } catch {
+    res.status(404).send({error: "Listing Does Not Exist"});
+  }
+};
