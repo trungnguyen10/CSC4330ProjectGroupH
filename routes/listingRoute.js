@@ -11,7 +11,9 @@ router
 // router
 //   .route("/sortByTime")
 //   .get(authenController.protect, sort(listingController.getAllListings));
-router.route("/:id").get(listingController.getListing);
-// .patch(listingController.updateListing)
-// .delete(listingController.deleteListing);
+router
+  .route("/:id")
+  .get(listingController.getListing)
+  .patch(listingController.updateListing)
+  .delete(listingController.deleteListing);
 module.exports = router;

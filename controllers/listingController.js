@@ -1,8 +1,12 @@
-const Listing = require("./../models/listingModel");
+const Listing = require(`${__dirname}/../models/listingModel`);
+const FilterFeatures = require(`${__dirname}/../utils/FilterFeatures`);
 
 exports.getAllListings = async (req, res) => {
   try {
-    const listings = await Listing.find();
+    const listings = await new FilterFeatures(Listing.find(), req.query)
+      .filter()
+      .sort()
+      .pagenate().query;
 
     res.status(200).json({
       status: "success",
@@ -39,6 +43,7 @@ exports.getListing = async (req, res) => {
 
 exports.createListing = async (req, res) => {
   try {
+    console.log(req.user);
     const newListing = await Listing.create(req.body);
 
     res.status(201).json({
@@ -54,3 +59,7 @@ exports.createListing = async (req, res) => {
     });
   }
 };
+
+exports.updateListing = function (req, res) {};
+
+exports.deleteListing = function (req, res) {};
