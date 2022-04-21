@@ -13,22 +13,24 @@
 <body>
 <div class="signup-box">
     <h1 >Sign Up</h1>
-    <form>
-        <label>First Name</label>
-        <input type="text" placeholder="" id="First">
-        <label>Last Name</label>
-        <input type="text" placeholder="" id="Last">
+    <form class="form" style="position: relative; top: -90px;" >
+        <label>Name</label>
+        <input type="text" placeholder="" id="name">
         <label>Email</label>
         <input type="email" placeholder="" id="email">
         <label>Password</label>
         <input type="password" placeholder="" id="password">
         <label>Confirm Password</label>
-        <input type="password" placeholder="" id="confirm">
-        <input type="button" value="Submit" id="submit">
+        <input type="password" placeholder="" id="passwordConfirm">
+        <button onclick="window.location.href='./client/login.html'">Word</button>
+
     </form>
 
 </div>
 <p style="color:white">Already have an account? <a style="color:#00FFFF"  href="./login.html"> Login here</a> </p>
-
+<link= rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.js"></script>
+        <script type="text/javascript" src="./signup.js"></script>
+        <link rel="stylesheet" href="./css/style.css">      
 </body>
 </html>

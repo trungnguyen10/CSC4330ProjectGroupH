@@ -1,26 +1,24 @@
 doctype html
-html
-    head
-        title Sign Up
-        link(href ="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet")
-        link(rel='stylesheet' href='./css/style.css')
-        
-        script(type="text/javascript" src="./js/signup.js")
-    
-    body
-        div.signup-box
-            h1 Sign Up
-            form
-                label First Name
-                input(type="text" placeholder="" id="First")
-                label Last Name
-                input(type="text" placeholder="" id="Last")
-                label Email
-                input(type="email" placeholder="" id="email")
-                label Password
-                input(type="password" placeholder="" id="password")
-                label Confirm Password
-                input(type="password" placeholder="" id="passwordConfirm")
-                button Submit
-        p(style="color:white") Already have an account?
-            a(style="color:#00FFFF"  href="./login") Login here
+
+head
+    title Sign Up
+    link(href ="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet")
+    link(rel='stylesheet' href='./css/style.css')
+body
+    div.signup-box
+     h1
+     h2 Sign Up
+     form.form()
+      label Name
+      input#name(type="text" placeholder="")
+      label Email
+      input#email(type='email' placeholder='')
+      label Password
+      input#password(type="password" placeholder="")
+      label Confirm Password
+      input#passwordConfirm(type="password" placeholder="")
+      button Submit
+    p(style="color:white") Already have an account?
+        a(style="color:#00FFFF"  href="./login") Login here
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.js') 
+    script(src='./js/signup.js')
