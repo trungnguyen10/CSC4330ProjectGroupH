@@ -13,7 +13,7 @@ router
 //   .get(authenController.protect, sort(listingController.getAllListings));
 router
   .route("/:id")
-  .get(listingController.getListing)
-  .patch(listingController.updateListing)
-  .delete(listingController.deleteListing);
+  .get(authenController.protect, listingController.getListing)
+  .patch(authenController.protect, listingController.updateListing)
+  .delete(authenController.protect, listingController.deleteListing);
 module.exports = router;
