@@ -9,3 +9,7 @@ exports.getLoginForm = function (req, res) {
 exports.getSignupForm = function (req, res) {
   res.status(200).render("signup");
 };
+
+exports.getProfileForm = function (req, res) {
+  res.status(200).render("profile");
+}

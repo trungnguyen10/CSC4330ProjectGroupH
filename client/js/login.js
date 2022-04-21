@@ -1,5 +1,3 @@
-
-
 const login = async (email, password) => {
   try {
     const result = await axios({
@@ -18,6 +16,7 @@ const login = async (email, password) => {
     }
   } catch (err) {
     console.log(err.response);
+    alert("Email or password is invalid. Please try again")
   }
 };
 
