@@ -11,6 +11,6 @@ router
   .route("/updatepassword")
   .patch(authenController.protect, authenController.updatePassword);
 
-router.route("/").get(userController.getUser);
+router.route("/").get(authenController.protect, userController.getUser);
 
 module.exports = router;

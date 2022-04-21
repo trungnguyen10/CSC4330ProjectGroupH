@@ -32,7 +32,7 @@ router.route("/homepage").get(async (req, res) => {
 router.route("/profile").get(async (req, res) => {
   const isLoggedIn = await authenController.isLoggedIn(req, res);
   console.log("made it to foward/profile");
-  if (!redirected) viewController.getProfileForm(req, res);
+  if (isLoggedIn) viewController.getProfileForm(req, res);
 });
 
 module.exports = router;
