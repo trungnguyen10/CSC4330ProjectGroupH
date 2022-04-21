@@ -46,7 +46,6 @@ exports.signup = catchAsync(async function (req, res, next) {
 
   // sign the token and let the user be logged in
   respondWithToken(201, newUser, res);
-  next();
 });
 
 exports.login = catchAsync(async function (req, res, next) {
@@ -117,7 +116,6 @@ exports.updatePassword = catchAsync(async function (req, res, next) {
 
   // 3- sign new token and send the response
   respondWithToken(201, user, res);
-  next();
 });
 
 exports.isLoggedIn = async function (req, res) {
