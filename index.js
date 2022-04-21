@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const AppError = require(`${__dirname}/utils/appError`);
@@ -10,6 +11,7 @@ const viewRoute = require(`${__dirname}/routes/viewRoute`);
 const fs = require("fs");
 
 const app = new express();
+app.use(cors());
 
 // set view engine
 app.set("view engine", "pug");
