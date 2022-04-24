@@ -4,7 +4,8 @@
     "description": "ColumbusList website to assist Columbus Univeristy student in buying and selling products",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon server.js"
+        "start": "nodemon server.js",
+        "test": "jest"
     },
     "repository": {
         "type": "git",
@@ -26,6 +27,7 @@
         "express": "^4.17.3",
         "git": "^0.1.5",
         "helmet": "^3.23.3",
+        "jest": "^27.5.1",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.13.14",
         "node": "^17.7.2",
