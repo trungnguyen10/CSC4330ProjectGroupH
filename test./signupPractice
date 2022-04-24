@@ -1,0 +1,6 @@
+module.exports = {
+    signUp: function(){
+        return
+        return 'name, email, password, passwordConfimed'
+    }
+}
