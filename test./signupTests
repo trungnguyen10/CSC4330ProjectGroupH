@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const signUp = require('../test/signupPractice').signUp;
+const signUp = require('../test./signupPractice').signUp;
 
 describe('Signup', function() {
     it('Signup should allow you to fill in name, email, password, passwordConfimed', function() {
