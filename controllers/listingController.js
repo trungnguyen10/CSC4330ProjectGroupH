@@ -68,8 +68,11 @@ exports.updateListing = async (req, res) => {
 
     const userID = req.user._id + "";
 
+    let listingDataObj = { ...req.body };
+    delete listingDataObj["belongTo"];
+
     if (userID === item.belongTo) {
-      Object.assign(item, req.body);
+      Object.assign(item, listingDataObj);
       item.save();
       res.status(200).json({
         status: "success",
