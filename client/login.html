@@ -27,8 +27,35 @@
 
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link= rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap">
+        <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.js"></script>
         <script type="text/javascript" src="./login.js"></script>
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+        <script>
+            var pusher = new Pusher('05d43d0b41f867def22d', { cluster: 'us2' });
+
+            // retrieve the socket ID once we're connected
+            pusher.connection.bind('connected', function () {
+                // attach the socket ID to all outgoing Axios requests
+                axios.defaults.headers.common['X-Socket-Id'] = pusher.connection.socket_id;
+            });
+
+            // request permission to display notifications, if we don't alreay have it
+            Notification.requestPermission();
+            pusher.subscribe('notifications')
+                .bind('price_updated', function (listing) {
+                    // if we're on the home page, show an "Updated" badge
+                    if (window.location.pathname === "/") {
+                        $('a[href="/api/v1/listing/' + listing._id + '"]').append('<span>Updated</span>');
+                    }
+                    var notification = new Notification(listing.title + "\'s price was just changed.");
+                    notification.onclick = function (event) {
+                        window.location.href = '/api/v1/listing/' + listing._id;
+                        event.preventDefault();
+                        notification.close();
+                    }
+                });
+        </script>
         <link rel="stylesheet" href="./css/style.css">
 </body>
 

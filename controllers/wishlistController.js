@@ -35,3 +35,16 @@ exports.getWishlist = catchAsync(async (req, res, next) => {
     data: { listings },
   });
 });
+
+exports.deleteListingInWishlist = catchAsync(async (req, res, next) => {
+  const user_id = req.user._id + "";
+  const listing_id = req.params.id;
+  const result = await Wishlist.find({ user_id, listing_id });
+  if (result.length) {
+    await Wishlist.deleteOne({ user_id, listing_id });
+    res.status(200).json({
+      status: "success",
+    });
+  } else
+    return next(new AppError("Listing does not exist in the wishlist", 400));
+});
