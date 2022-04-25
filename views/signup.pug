@@ -4,6 +4,7 @@ head
     title Sign Up
     link(href ="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet")
     link(rel='stylesheet' href='./css/style.css')
+   
 body
     div.signup-box
      h1
@@ -12,7 +13,7 @@ body
      h2(style='position: relative; top: -90px;') Sign Up
      form.signup(style='position: relative; top: -110px;')
        label Name
-       input#name(type="text" placeholder="")
+       input#name(type="name" placeholder="")
        label Email
        input#email(type='email' placeholder='')
        label Password
@@ -21,6 +22,7 @@ body
        input#passwordConfirm(type="password" placeholder="")
        button Submit
     p(style="color:white") Already have an account?
-        a(style="color:#00FFFF"  href="./login") Login here
+        a(style="color:#00FFFF"  href='./login') Login here
     script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.js') 
     script(src='./js/signup.js')
+    
