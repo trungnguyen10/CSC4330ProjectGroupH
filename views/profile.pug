@@ -6,16 +6,20 @@ head
         p name: #{user.name}
         p email: #{user.email}
         p id: #{user._id}
+        p number of listings #{listings.length}
         p  Listings 
-        ul
-        each title in listings
-            li #{title}       
+        
+        each listing  in listings
+         ul
+            li  #{listing.title}
+            li #{listing._id} 
+            li  $ #{listing.price}
     p Delete Listing 
-        p #{listings.length}
+       
     p Edit Listing
 
         ul
-            li#{filledArray}
+           
 
 
     a(href="http://127.0.0.1:3000/api/v1/user/logout"): button(type="button")  Logout

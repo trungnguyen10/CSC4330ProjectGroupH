@@ -2,6 +2,7 @@ const catchAsync = require(`${__dirname}/../utils/catchAsync`);
 const AppError = require(`${__dirname}/../utils/appError`);
 const Listing = require(`${__dirname}/../models/listingModel`);
 
+
 exports.getHomePage = catchAsync(async function (req, res, next) {
   const listings = await Listing.find().sort("-createAt");
   console.log(listings);
