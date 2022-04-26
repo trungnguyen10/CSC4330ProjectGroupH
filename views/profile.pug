@@ -1,32 +1,47 @@
 doctype html
+.Header_box
+  a(href='#') Home
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.js')        
+script(src='./js/profile.js')  
+link(rel='stylesheet' href='./css/profilestyle.css')
 head
     body 
         h1 Profile
-    p User Info 
-        p name: #{user.name}
-        p email: #{user.email}
-        p id: #{user._id}
-        p number of listings #{listings.length}
-        p  Listings 
+        div.user-info
+            p name: #{user.name}
+            p email: #{user.email}
+            p id: #{user._id}
+            p number of listings #{listings.length}
         
-        each listing  in listings
-         ul
-            li  #{listing.title}
-            li #{listing._id} 
-            li  $ #{listing.price}
-                
-                 button(type="buttton") Edit
-                 button(type="button") Delete
-              
-    p Delete Listing 
-       
-    p Edit Listing
+        
+        
+        
+            h2 Current Listings 
+            each listing  in listings
+                div.wrapper 
+                    dl
 
-        ul
-           
+                        dt Title: #{listing.title} 
+                        dd Id: #{listing._id}       
+                        dd  Price: $ #{listing.price}
+                        br
+                        button(type="Edit") Edit
+                        br
+                        button(onclick="deleteListing(listing._id)") Delete
+                        br
 
+            
+             
+            div.button
+            a(href="http://127.0.0.1:3000/api/v1/user/logout"): button(type="button")  Logout
+        //p Hello my name is #{arrayforChart}
 
-a(href="http://127.0.0.1:3000/api/v1/user/logout"): button(type="button")  Logout
-script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.js')        
-script(src='./js/profile.js')  
+    script.
+        const deleteListing = async(id) => {
+        console.log(id);   
+        axios.delete("http://127.0.0.1:3000/api/v1/listing/", {params: { _id : id}}).then(repoonse => {
+        console.log(reponse);
+        })
+        }
     
+

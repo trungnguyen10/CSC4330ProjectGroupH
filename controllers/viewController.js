@@ -23,3 +23,5 @@ exports.getProfileForm = catchAsync(async function (req, res, next) {
   console.log(listings);
   res.status(200).render("profile", { user: req.user, listings });
 });
+
+

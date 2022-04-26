@@ -9,13 +9,31 @@
 //     }).catch(() =>{
 //         alert('Error retrieving data');
 //     });
+
+
+
     
 
+
+// const deleteListing = async(id) => {
+//     axios.delete("http://127.0.0.1:3000/api/v1/listing/", {params: { _id : id}}).then(repoonse => {
+//     console.log(reponse);
+//     })
 // }
 
-let filledArray = new Array(10).fill('hello');
+//  var bored =  document.querySelector("Edit").addEventListener("Edit", (e) => {
+//      if(bored){
+//         e.preventDefault();
+//         alert("Hello World!");
+//      }
+    
+//    });
 
+   
 
+//   document.getElementById("Edit").onclick = function() {
+//     alert("Hello World!");
+// }
 // pug.render();
 
 

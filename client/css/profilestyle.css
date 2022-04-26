@@ -1,0 +1,72 @@
+body {
+    background-color: white;
+    font-family: "Roboto", sans-serif;
+  }
+
+  h1 {
+    text-align: center;
+    padding-top: 15px;
+    font-family: "Times New Roman", "Times", "sans-serif";
+    font-weight: 20;
+  }
+
+  .user-info {
+    width: 360px;
+    color:aliceblue;
+    height: 150px;
+    margin: auto;
+    border-radius: 10px;
+    background-color: #344a72;
+    font-family: "Arial Black", "Arial", "sans seriff";
+
+}
+
+
+.wrapper dl{
+    overflow-y: scroll;
+    color: white;
+    justify-content: center;
+    display: flex;
+    display:inline-table;
+    background-color: white;
+    margin: auto;
+    border-radius: 3px;
+    width: 360px;
+    height: 150px;
+    background-color: #344a72;
+    font-family: "Arial Black", "Arial", "sans seriff";
+    
+}
+
+h2 {
+    text-align: center;
+    padding-top: 15px;
+    font-family: "Times New Roman", "Times", "sans-serif";
+    font-weight: 20;
+  }
+
+  .button {
+    text-align: center;
+  }
+  .Header_box{
+    position: fixed;
+    overflow: visible;
+    background-color: #344a72; 
+    padding: none;
+    height: 50px;
+    width: 100%;
+    min-width: 1080px;
+}
+
+.Header_box a {
+    overflow: visible;
+    font-family: "Arial Black", "Arial", "sans seriff";
+    color:  white;
+    text-decoration: none;
+    font-size: 30px;
+    padding: 0px 30px 0px 30px;
+}
+
+.Header_box a:hover {
+    color: #1B95CE;
+}
