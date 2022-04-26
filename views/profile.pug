@@ -5,12 +5,20 @@ head
     p User Info 
         p name: #{user.name}
         p email: #{user.email}
-        
-
+        p id: #{user._id}
+        p  Listings 
+        ul
+        each title in listings
+            li #{title}       
     p Delete Listing 
-
+        p #{listings.length}
     p Edit Listing
+
+        ul
+            li#{filledArray}
+
 
     a(href="http://127.0.0.1:3000/api/v1/user/logout"): button(type="button")  Logout
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.js')        
-//- script(src='./js/profile.js')        
+script(src='./js/profile.js')  
+    

@@ -16,7 +16,9 @@ exports.getSignupForm = function (req, res) {
   res.status(200).render("signup");
 };
 
-exports.getProfileForm = function (req, res, next) {
+exports.getProfileForm = catchAsync(async function (req, res, next) {
+  const listings = await Listing.find().sort("-createAt");
   console.log(req.user);
-  res.status(200).render("profile", { user: req.user });
-};
+  console.log(listings);
+  res.status(200).render("profile", { user: req.user, listings });
+});

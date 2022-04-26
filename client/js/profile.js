@@ -1,26 +1,24 @@
 
 
 
-const getUser = () => {
-    axios.get("http://127.0.0.1:3000/api/v1/user/")
-    .then((user) => {
-        const data = user.data;
-        console.log("User data recieved", data);
-    }).catch(() =>{
-        alert('Error retrieving data');
-    });
+// const getUser = () => {
+//     axios.get("http://127.0.0.1:3000/api/v1/user/")
+//     .then((user) => {
+//         const data = user.data;
+//         console.log("User data recieved", data);
+//     }).catch(() =>{
+//         alert('Error retrieving data');
+//     });
     
 
-}
-resizeBy.render
+// }
+
+let filledArray = new Array(10).fill('hello');
+
+
 // pug.render();
 
-router.get("/profile",(req,res)=> {
-    res.render("profile", {
-        user: req.user
-    });
-})
-getUser(); 
+
 // console.log(compiledFunction({
 //     data
 // }))
