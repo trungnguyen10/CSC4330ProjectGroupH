@@ -11,5 +11,6 @@ exports.getSignupForm = function (req, res) {
 };
 
 exports.getProfileForm = function (req, res) {
+  console.log(req.user);
   res.status(200).render("profile");
-}
+};
