@@ -3,8 +3,8 @@ head
     body 
         h1 Profile
     p User Info 
-        p name: #{name}
-        p email:
+        p name: #{user.name}
+        p email: #{user.email}
         
 
     p Delete Listing 
@@ -13,4 +13,4 @@ head
 
     a(href="http://127.0.0.1:3000/api/v1/user/logout"): button(type="button")  Logout
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.js')        
-script(src='./js/profile.js')        
+//- script(src='./js/profile.js')        
