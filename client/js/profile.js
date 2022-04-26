@@ -1,5 +1,6 @@
 
 
+
 const getUser = () => {
     axios.get("http://127.0.0.1:3000/api/v1/user/")
     .then((user) => {
@@ -11,10 +12,15 @@ const getUser = () => {
     
 
 }
-
+resizeBy.render
 // pug.render();
-getUser(); 
 
+router.get("/profile",(req,res)=> {
+    res.render("profile", {
+        user: req.user
+    });
+})
+getUser(); 
 // console.log(compiledFunction({
 //     data
 // }))
