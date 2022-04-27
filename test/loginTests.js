@@ -22,3 +22,12 @@ describe('Login', function() {
         assert.equal(signupHere, "./signup.html");
     });
 });
+
+// > csc4330projectgrouph@1.0.0 test
+// > mocha
+// Login
+// ✔ login should allow you to fill in your created email and password
+// ✔ login should return type string
+// ✔ login should notify the user when email and/or password are wrong
+// ✔ The button at the bottom of the login page should bring the user to the signup
+// 4 passing (31ms)
