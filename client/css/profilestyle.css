@@ -1,19 +1,21 @@
 body {
-    background-color: white;
-    font-family: "Roboto", sans-serif;
+    margin: 0px;
+    padding: 0px;
+    background-color: lightblue;
   }
 
   h1 {
     text-align: center;
     padding-top: 15px;
-    font-family: "Times New Roman", "Times", "sans-serif";
+    font-family: "Arial Black", "Arial", "sans seriff";
     font-weight: 20;
   }
 
   .user-info {
     width: 360px;
     color:aliceblue;
-    height: 150px;
+    height: 120px;
+    
     margin: auto;
     border-radius: 10px;
     background-color: #344a72;
@@ -23,32 +25,38 @@ body {
 
 
 .wrapper dl{
-    overflow: scroll;
+  position: relative;
+    margin: 0px;
     color: white;
     justify-content: center;
     display: flex;
-    display:inline-table;
     background-color: white;
     margin: auto;
     border-radius: 3px;
-    padding: 1;
+    border-left: 10px;
     background-color: #344a72;
     font-family: "Arial Black", "Arial", "sans seriff";
+    padding: 10px;
+    width: 800px;
+    height: 50px;
+    
     
 }
 
 h2 {
     text-align: center;
     padding-top: 15px;
-    font-family: "Times New Roman", "Times", "sans-serif";
+    font-family: "Arial Black", "Arial", "sans seriff";
     font-weight: 20;
+    color:black;
   }
 
   .button {
     text-align: center;
   }
+
   .Header_box{
-    position: fixed;
+    position: relative;
     overflow: visible;
     background-color: #344a72; 
     padding: none;
@@ -68,4 +76,23 @@ h2 {
 
 .Header_box a:hover {
     color: #1B95CE;
+
+}
+.Logoutbutton button{
+   justify-items: center;
+   text-align: center;
+   display: block;
+   left:50px;
+}
+
+.wrapper .EditandDelete button{
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  
+}
+
+.wrapper p {
+ padding-left: 5px;
+ 
 }

@@ -1,6 +1,7 @@
 doctype html
 .Header_box
   a(href='/homepage') Home
+  a(href="http://127.0.0.1:3000/api/v1/user/logout") Logout
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.js')        
 script(src='./js/profile.js')  
 link(rel='stylesheet' href='./css/profilestyle.css')
@@ -11,53 +12,49 @@ head
         div.user-info
             p name: #{user.name}
             p email: #{user.email}
-            p id: #{user._id}
             p number of listings #{listings.length}
-        
+        div
         
        
         
             h2 Current Listings 
             each listing  in listings
-                div.wrapper 
+                .wrapper 
                     dl
-                        p Title
+                        p Title:
                         input#title(type="text" value=`${listing.title}`)
-                        p Id
-                        dd  #{listing._id} 
-                        p Price      
+                        p Price:      
                         input#price(type="number" value=`${listing.price}`)
-                        p Tag
+                        p Tag:
                         input#tag(type="text" value=`${listing.tag}`) 
                         br
-                        button(onclick=`editListing(\"${listing._id}\")`) Edit
+                        .EditandDelete
+                            button(onclick=`editListing(\"${listing._id}\")`) Edit
+                            button(onclick=`deleteListing(\"${listing._id}\")`) Delete
                         br
-                        button(onclick=`deleteListing(\"${listing._id}\")`) Delete
-                        br
+                div        
 
           
-             
-            div.button
-            a(href="http://127.0.0.1:3000/api/v1/user/logout"): button(type="button")  Logout
-        //p Hello my name is #{arrayforChart}
+            br 
+        
 
     script.
         const deleteListing = async(id) => {
                 console.log(id);   
-                axios.delete(`http://127.0.0.1:3000/api/v1/listing/${id}`).then(response => {
-                console.log(response);
+                axios.delete(`http://127.0.0.1:3000/api/v1/listing/${id}`).then(reponse => {
+                console.log(reponse);
             })
         }
         
     
     script.
-        const editListing = async(id,title, price, tag) => {
+        const editListing = async(title, price, tag, id) => {
             var title = document.getElementById("title").value;
             var price = document.getElementById("price").value;
             var tag = document.getElementById("tag").value;
             console.log(title,price,tag,id);
-            axios.patch(`http://127.0.0.1:3000/api/v1/listing/${id}`,{"_id": id, "title" : title, "price" : price, "tag" : tag}).then(response => {
-                console.log(response);
+            axios.patch(`http://127.0.0.1:3000/api/v1/listing/`,{"_id": id, "title" : title, "price" : price, "tag" : tag}).then(repsonse => {
+                console.log(reponse);
             })
         }
 
