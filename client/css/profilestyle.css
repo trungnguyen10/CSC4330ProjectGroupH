@@ -23,7 +23,7 @@ body {
 
 
 .wrapper dl{
-    overflow-y: scroll;
+    overflow: scroll;
     color: white;
     justify-content: center;
     display: flex;
@@ -31,8 +31,7 @@ body {
     background-color: white;
     margin: auto;
     border-radius: 3px;
-    width: 360px;
-    height: 150px;
+    padding: 1;
     background-color: #344a72;
     font-family: "Arial Black", "Arial", "sans seriff";
     
