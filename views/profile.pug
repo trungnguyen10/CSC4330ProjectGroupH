@@ -21,8 +21,9 @@ head
             each listing  in listings
                 .wrapper 
                     dl
-                        p Title:
-                        input#title(type="text" value=`${listing.title}`)
+                        p
+                        input(id=`title.${listing._id}` 
+                        type="text" value=`${listing.title}`)
                         p Price:      
                         input#price(type="number" value=`${listing.price}`)
                         p Tag:
@@ -49,11 +50,11 @@ head
     
     script.
         const editListing = async(title, price, tag, id) => {
-            var title = document.getElementById("title").value;
+            var title = document.getElementById(`title.${id}`).value;
             var price = document.getElementById("price").value;
             var tag = document.getElementById("tag").value;
             console.log(title,price,tag,id);
-            axios.patch(`http://127.0.0.1:3000/api/v1/listing/`,{"_id": id, "title" : title, "price" : price, "tag" : tag}).then(repsonse => {
+            axios.patch(`http://127.0.0.1:3000/api/v1/listing/`,{"title" : title, "price" : price, "tag" : tag}).then(repsonse => {
                 console.log(reponse);
             })
         }

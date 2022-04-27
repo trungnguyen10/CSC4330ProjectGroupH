@@ -1,12 +1,12 @@
-const editListing = async(title, price, tag, id) => {
-    var title = document.getElementById("title").value;
-    var price = document.getElementById("price").value;
-    var tag = document.getElementById("tag").value;
-    console.log(title,price,tag,id);
-    axios.patch(`http://127.0.0.1:3000/api/v1/listing/`,{"_id": id, "title" : title, "price" : price, "tag" : tag}).then(repsonse => {
-        console.log(reponse);
-    })
-}
+// const editListing = async(title, price, tag, id) => {
+//     var title = document.getElementById("title").value;
+//     var price = document.getElementById("price").value;
+//     var tag = document.getElementById("tag").value;
+//     console.log(title,price,tag,id);
+//     axios.patch(`http://127.0.0.1:3000/api/v1/listing/`,{"_id": id, "title" : title, "price" : price, "tag" : tag}).then(repsonse => {
+//         console.log(reponse);
+//     })
+// }
 
 
 // const getUser = () => {
