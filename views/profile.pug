@@ -49,13 +49,13 @@ head
         
     
     script.
-        const editListing = async(title, price, tag,id) => {
+        const editListing = async(id) => {
             var title = document.getElementById(`title.${id}`).value;
             var price = document.getElementById(`price.${id}`).value;
             var tag = document.getElementById(`tag.${id}`).value;
             console.log(title,price,tag);
-            axios.patch(`http://127.0.0.1:3000/api/v1/listing/`,{ "title" : title, "price" : price, "tag" : tag}).then(repsonse => {
-                console.log(reponse);
+            axios.patch(`http://127.0.0.1:3000/api/v1/listing/${id}`,{ "title" : title, "price" : price, "tag" : tag}).then(response => {
+                console.log(response);
                  window.location.reload();
             })
         }
