@@ -8,6 +8,9 @@ exports.getAllListings = async (req, res) => {
       .sort()
       .pagenate().query;
 
+    // set local variable for pug file
+    res.locals.listings = listings;
+
     res.status(200).json({
       status: "success",
       results: listings.length,
