@@ -21,13 +21,12 @@ head
             each listing  in listings
                 .wrapper 
                     dl
-                        p
-                        input(id=`title.${listing._id}` 
-                        type="text" value=`${listing.title}`)
+                        p Title:
+                        input(id=`title.${listing._id}` type="text" value=`${listing.title}`)
                         p Price:      
-                        input#price(type="number" value=`${listing.price}`)
+                        input(id=`price.${listing._id}` type="number" value=`${listing.price}`)
                         p Tag:
-                        input#tag(type="text" value=`${listing.tag}`) 
+                        input(id=`tag.${listing._id}` type="text" value=`${listing.tag}`)
                         br
                         .EditandDelete
                             button(onclick=`editListing(\"${listing._id}\")`) Edit
@@ -44,18 +43,20 @@ head
                 console.log(id);   
                 axios.delete(`http://127.0.0.1:3000/api/v1/listing/${id}`).then(reponse => {
                 console.log(reponse);
+                window.location.reload();
             })
         }
         
     
     script.
-        const editListing = async(title, price, tag, id) => {
+        const editListing = async(title, price, tag,id) => {
             var title = document.getElementById(`title.${id}`).value;
-            var price = document.getElementById("price").value;
-            var tag = document.getElementById("tag").value;
-            console.log(title,price,tag,id);
-            axios.patch(`http://127.0.0.1:3000/api/v1/listing/`,{"title" : title, "price" : price, "tag" : tag}).then(repsonse => {
+            var price = document.getElementById(`price.${id}`).value;
+            var tag = document.getElementById(`tag.${id}`).value;
+            console.log(title,price,tag);
+            axios.patch(`http://127.0.0.1:3000/api/v1/listing/`,{ "title" : title, "price" : price, "tag" : tag}).then(repsonse => {
                 console.log(reponse);
+                 window.location.reload();
             })
         }
 
