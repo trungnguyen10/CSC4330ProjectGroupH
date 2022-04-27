@@ -3,70 +3,52 @@ doctype html
   a(href='/homepage') Home
   a(href="http://127.0.0.1:3000/api/v1/user/logout") Logout
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.js')        
-script(src='./js/profile.js')  
 link(rel='stylesheet' href='./css/profilestyle.css')
-head
-     
-    body 
-        h1 Profile
-        div.user-info
-            p name: #{user.name}
-            p email: #{user.email}
-            p number of listings #{listings.length}
-        div
-        
-       
-        
-            h2 Current Listings 
-            each listing  in listings
-                .wrapper 
-                    dl
-                        p Title:
-                        input(id=`title.${listing._id}` type="text" value=`${listing.title}`)
-                        p Price:      
-                        input(id=`price.${listing._id}` type="number" value=`${listing.price}`)
-                        p Tag:
-                        input(id=`tag.${listing._id}` type="text" value=`${listing.tag}`)
-                        br
-                        .EditandDelete
-                            button(onclick=`editListing(\"${listing._id}\")`) Edit
-                            button(onclick=`deleteListing(\"${listing._id}\")`) Delete
-                        br
-                div        
-
-          
-            br 
-        
+body 
+    h1 Profile
+    div.user-info
+        p name: #{user.name}
+        p email: #{user.email}
+        p number of listings #{listings.length}
+    h2 Current Listings 
+    each listing  in listings
+     .wrapper 
+         dl
+             p Title:
+             input(id=`title.${listing._id}` type="text" value=`${listing.title}`)
+             p Price:      
+             input(id=`price.${listing._id}` type="number" value=`${listing.price}`)
+             p Tag:
+             input(id=`tag.${listing._id}` type="text" value=`${listing.tag}`)
+             br
+             .EditandDelete
+             button(onclick=`editListing(\"${listing._id}\")`) Edit
+             button(onclick=`deleteListing(\"${listing._id}\")`) Delete
+                    
+                 
+            
+    //- h3 Wishlist Items   
 
     script.
         const deleteListing = async(id) => {
-                console.log(id);   
                 axios.delete(`http://127.0.0.1:3000/api/v1/listing/${id}`).then(reponse => {
                 console.log(reponse);
                 window.location.reload();
+                alert("Listing deleted")
             })
         }
-        
-    
     script.
         const editListing = async(id) => {
             var title = document.getElementById(`title.${id}`).value;
             var price = document.getElementById(`price.${id}`).value;
             var tag = document.getElementById(`tag.${id}`).value;
-            console.log(title,price,tag);
             axios.patch(`http://127.0.0.1:3000/api/v1/listing/${id}`,{ "title" : title, "price" : price, "tag" : tag}).then(response => {
                 console.log(response);
                  window.location.reload();
+                 alert("Listing updated");
             })
         }
 
-        //- document.querySelector(".signup").addEventListener("submit", (e) => {
-        //- e.preventDefault();
-        //- const title = document.getElementById("name").value;
-        //- const email = document.getElementById("email").value;
-        //- const password = document.getElementById("password").value;
-        //- const passwordConfirm = document.getElementById("passwordConfirm").value;
-        //- signup(name,email,password,passwordConfirm);
-        //- });
+        
 
 
