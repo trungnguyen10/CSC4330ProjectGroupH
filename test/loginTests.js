@@ -1,3 +1,15 @@
+// submit these items under the terminal:
+// Npm install mocha
+// Npm install chai
+// Make sure that mocha, chai, and jest are part of dependencies and other sets in the package.json and package-lock.json
+// Next, you would have to put “test”: ”mocha” under the “scripts” section of the .json files
+// Create a test java file within the coding program
+// Set up the code so that it could be read through chai and mocha in node
+// Such as bringing in should, expect, and assert as a constant for chai; and describe, it, and other terms that deal with testing for mocha
+// Now, put “npm test” or “npm run test” in the terminal
+// There the user will see if their test(s) is/are passing or failed
+// Following that, the user can either add more tests or fix those that failed
+
 const assert = require('chai').assert;
 const logIn = require('../test/loginPractice').logIn;
 
