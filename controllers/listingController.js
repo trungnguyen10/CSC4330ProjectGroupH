@@ -1,4 +1,5 @@
 const Listing = require(`${__dirname}/../models/listingModel`);
+const Wishlist = require(`${__dirname}/../models/wishlistModel`);
 const FilterFeatures = require(`${__dirname}/../utils/FilterFeatures`);
 
 exports.getAllListings = async (req, res) => {
@@ -96,6 +97,7 @@ exports.deleteListing = async (req, res) => {
 
     if (userID === listing.belongTo) {
       await Listing.findByIdAndDelete(req.params.id);
+      await Wishlist.deleteMany({ listing_id: req.params.id });
       res.status(200).json({
         status: "sucess",
       });
