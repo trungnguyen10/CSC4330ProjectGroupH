@@ -21,8 +21,14 @@ exports.getProfileForm = catchAsync(async function (req, res, next) {
   const userId = req.user._id + "";
   const listings = await Listing.find({ belongTo: userId }).sort("-createAt");
   const wishlists = await WishList.find({ user_id: userId });
-  console.log(req.user);
-  console.log(listings);
-  console.log(wishlists);
-  res.status(200).render("profile", { user: req.user, listings, wishlists });
+  let listingInWish = [];
+  if (wishlists) {
+    for (const element of wishlists) {
+      const aListing = await Listing.findById(element.listing_id);
+      listingInWish.push(aListing);
+    }
+  }
+  res
+    .status(200)
+    .render("profile", { user: req.user, listings, listingInWish });
 });
