@@ -9,30 +9,41 @@ body
     div.user-info
         p name: #{user.name}
         p email: #{user.email}
-        p number of listings #{listings.length}
+        p number of listings: #{listings.length}
+        p number of wishlist items: #{listingInWish.length}
+
+        
     h2 Current Listings 
     each listing  in listings
-     .wrapper 
-         dl
-             p Title:
-             input(id=`title.${listing._id}` type="text" value=`${listing.title}`)
-             p Price:      
-             input(id=`price.${listing._id}` type="number" value=`${listing.price}`)
-             p Tag:
-             input(id=`tag.${listing._id}` type="text" value=`${listing.tag}`)
-             br
-             .EditandDelete
-             button(onclick=`editListing(\"${listing._id}\")`) Edit
-             button(onclick=`deleteListing(\"${listing._id}\")`) Delete
+        .wrapper 
+             dl
+                p Title:
+                input(id=`title.${listing._id}` type="text" value=`${listing.title}`)
+                p Price:      
+                 input(id=`price.${listing._id}` type="number" value=`${listing.price}`)
+                p Tag:
+                input(id=`tag.${listing._id}` type="text" value=`${listing.tag}`)
+                br
+                .EditandDelete
+                 button(onclick=`editListing(\"${listing._id}\")`) Edit
+                 button(onclick=`deleteListing(\"${listing._id}\")`) Delete
                     
-                 
-            
-    //- h3 Wishlist Items   
-
+    h3 Wishlist Items   
+    each wishlist in listingInWish
+        .wishlist
+            dl      
+                    p Title:
+                    p #{wishlist.title}
+                    p Price:
+                    p #{wishlist.price}
+                    p Tag:
+                    p #{wishlist.tag}
+                    buttton(onclick=`deleteWishlist(\"${wishlist._id}\")`) Delete
+         
     script.
         const deleteListing = async(id) => {
-                axios.delete(`http://127.0.0.1:3000/api/v1/listing/${id}`).then(reponse => {
-                console.log(reponse);
+                axios.delete(`http://127.0.0.1:3000/api/v1/listing/${id}`).then(response => {
+                console.log(response);
                 window.location.reload();
                 alert("Listing deleted")
             })
@@ -48,7 +59,14 @@ body
                  alert("Listing updated");
             })
         }
+    script.
+        const deleteWishlist = async(id) => {
+            axios.delete(`http://127.0.0.1:3000/api/v1/wishlist/${id}`).then(response => {
+                console.log(response);
+                 window.location.reload();
+                 alert("wishlist item deleted")
+            })
 
-        
+        }
 
 
