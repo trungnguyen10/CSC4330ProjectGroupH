@@ -5,7 +5,6 @@ const WishList = require(`${__dirname}/../models/wishlistModel`);
 
 exports.getHomePage = catchAsync(async function (req, res, next) {
   const listings = await Listing.find().sort("-createAt");
-  console.log(listings);
   res.status(200).render("homepage", { listings });
 });
 

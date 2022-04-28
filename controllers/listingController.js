@@ -1,109 +1,85 @@
 const Listing = require(`${__dirname}/../models/listingModel`);
 const Wishlist = require(`${__dirname}/../models/wishlistModel`);
 const FilterFeatures = require(`${__dirname}/../utils/FilterFeatures`);
+const catchAsync = require(`${__dirname}/../utils/catchAsync`);
+const AppError = require(`${__dirname}/../utils/appError`);
 
-exports.getAllListings = async (req, res) => {
-  try {
-    const listings = await new FilterFeatures(Listing.find(), req.query)
-      .filter()
-      .sort()
-      .pagenate().query;
+exports.getAllListings = catchAsync(async (req, res) => {
+  const listings = await new FilterFeatures(Listing.find(), req.query)
+    .filter()
+    .sort()
+    .pagenate().query;
 
-    // set local variable for pug file
-    res.locals.listings = listings;
+  // set local variable for pug file
+  res.locals.listings = listings;
 
+  res.status(200).json({
+    status: "success",
+    results: listings.length,
+    data: {
+      listings,
+    },
+  });
+});
+
+exports.getListing = catchAsync(async (req, res) => {
+  const listing = await Listing.findById(req.params.id);
+
+  if (!listing) return next(new AppError("Listing does not exist!", 404));
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      listing,
+    },
+  });
+});
+
+exports.createListing = catchAsync(async (req, res) => {
+  const listingInfo = { ...req.body };
+  listingInfo.belongTo = req.user._id;
+
+  const newListing = await Listing.create(listingInfo);
+
+  res.status(201).json({
+    status: "success",
+    data: {
+      Listing: newListing,
+    },
+  });
+});
+
+exports.updateListing = catchAsync(async (req, res, next) => {
+  const item = await Listing.findById(req.params.id);
+  if (!item)
+    return next(new AppError("You are not the Owner of this Listing.", 404));
+
+  const userID = req.user._id + "";
+
+  let listingDataObj = { ...req.body };
+  delete listingDataObj["belongTo"];
+
+  if (userID === item.belongTo) {
+    Object.assign(item, listingDataObj);
+    item.save();
     res.status(200).json({
       status: "success",
-      results: listings.length,
-      data: {
-        listings,
-      },
+      data: item,
     });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.toString(),
-    });
-  }
-};
+  } else
+    return next(new AppError("You are not the Owner of this Listing.", 404));
+});
 
-exports.getListing = async (req, res) => {
-  try {
-    const listing = await Listing.findById(req.params.id);
-
+exports.deleteListing = catchAsync(async (req, res, next) => {
+  const listing = await Listing.findById(req.params.id);
+  if (!listing) return next(new AppError("Listing does not exist!", 404));
+  const userID = req.user._id + "";
+  if (userID === listing.belongTo) {
+    await Listing.findByIdAndDelete(req.params.id);
+    await Wishlist.deleteMany({ listing_id: req.params.id });
     res.status(200).json({
-      status: "success",
-      data: {
-        listing,
-      },
+      status: "sucess",
     });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.toString(),
-    });
-  }
-};
-
-exports.createListing = async (req, res) => {
-  try {
-    const listingInfo = { ...req.body };
-    listingInfo.belongTo = req.user._id;
-
-    const newListing = await Listing.create(listingInfo);
-
-    res.status(201).json({
-      status: "success",
-      data: {
-        Listing: newListing,
-      },
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: "fail",
-      message: err.toString(),
-    });
-  }
-};
-
-exports.updateListing = async (req, res) => {
-  try {
-    const item = await Listing.findById(req.params.id);
-
-    const userID = req.user._id + "";
-
-    let listingDataObj = { ...req.body };
-    delete listingDataObj["belongTo"];
-
-    if (userID === item.belongTo) {
-      Object.assign(item, listingDataObj);
-      item.save();
-      res.status(200).json({
-        status: "success",
-        data: item,
-      });
-    } else
-      res.status(404).send({ error: "You are not the Owner of this Listing." });
-  } catch {
-    res.status(404).send({ error: "Listing Does Not Exist" });
-  }
-};
-
-exports.deleteListing = async (req, res) => {
-  try {
-    const userID = req.user._id + "";
-
-    const listing = await Listing.findById(req.params.id);
-
-    if (userID === listing.belongTo) {
-      await Listing.findByIdAndDelete(req.params.id);
-      await Wishlist.deleteMany({ listing_id: req.params.id });
-      res.status(200).json({
-        status: "sucess",
-      });
-    } else
-      res.status(404).send({ error: "You are not the Owner of this Listing." });
-  } catch (err) {
-    res.status(404).send({ error: err.toString() });
-  }
-};
+  } else
+    return next(new AppError("You are not the Owner of this Listing.", 404));
+});
