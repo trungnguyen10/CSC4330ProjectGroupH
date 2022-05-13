@@ -28,10 +28,11 @@ body
                  button(onclick=`editListing(\"${listing._id}\")`) Edit
                  button(onclick=`deleteListing(\"${listing._id}\")`) Delete
                     
-    h3 Wishlist Items   
-    each wishlist in listingInWish
-        .wishlist
-            dl      
+    h3 Wishlist Items  
+    if listingInWish
+        each wishlist in listingInWish
+            .wishlist
+                dl      
                     p Title:
                     p #{wishlist.title}
                     p Price:
@@ -39,7 +40,7 @@ body
                     p Tag:
                     p #{wishlist.tag}
                     buttton(onclick=`deleteWishlist(\"${wishlist._id}\")`) Delete
-         
+            
     script.
         const deleteListing = async(id) => {
                 axios.delete(`http://127.0.0.1:3000/api/v1/listing/${id}`).then(response => {

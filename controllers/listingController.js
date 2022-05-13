@@ -4,7 +4,7 @@ const FilterFeatures = require(`${__dirname}/../utils/FilterFeatures`);
 const catchAsync = require(`${__dirname}/../utils/catchAsync`);
 const AppError = require(`${__dirname}/../utils/appError`);
 
-exports.getAllListings = catchAsync(async (req, res) => {
+exports.getAllListings = catchAsync(async (req, res, next) => {
   const listings = await new FilterFeatures(Listing.find(), req.query)
     .filter()
     .sort()
@@ -22,7 +22,7 @@ exports.getAllListings = catchAsync(async (req, res) => {
   });
 });
 
-exports.getListing = catchAsync(async (req, res) => {
+exports.getListing = catchAsync(async (req, res, next) => {
   const listing = await Listing.findById(req.params.id);
 
   if (!listing) return next(new AppError("Listing does not exist!", 404));
@@ -35,7 +35,7 @@ exports.getListing = catchAsync(async (req, res) => {
   });
 });
 
-exports.createListing = catchAsync(async (req, res) => {
+exports.createListing = catchAsync(async (req, res, next) => {
   const listingInfo = { ...req.body };
   listingInfo.belongTo = req.user._id;
 

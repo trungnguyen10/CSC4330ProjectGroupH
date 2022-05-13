@@ -1,25 +1,64 @@
 doctype html
-.Header_box
-  a(href='#') Home
-  a(href='#') Favorites
-  a(href='#') For You
-  a(href='#') Filter
-  input.search-box(type='text' placeholder='  Enter a search term')
-  .Account-Menu
-    img(src='./img/Dropdown.png')
-    ol.Drop-Button
-      li 
-       a(href="/profile") Account
-      li My Listings  
-      li My cart
-      li My WishList
-      li Personal Information
-      li Settings
-.Listing-Zone
-  each listing  in listings
-    button(type='button')
-      h1 #{listing.title}
-      p #{listing.tag}
-      img(src='./img/CSU_Logo.png' alt='Image Place')
+head
+  title
+body
+  nav(class= "navbar sticky-top navbar-expand-lg navbar-dark bg-primary")
+    div(class="container-fluid")
+      a(class="navbar-brand" href="#") ColumbusList
+      button(class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+        span(class="navbar-toggler-icon")
+      div(class="collapse navbar-collapse" id="navbarSupportedContent")
+        ul(class="navbar-nav me-auto mb-2 mb-lg-0")
+          li(class='nav-item')
+            a(class='nav-link active' href='/homepage') Home
+          li(class='nav-item') 
+            a(class='nav-link' href='#') Favorites
+          li(class='nav-item')
+            a(class='nav-link' href='#') For You
+          li(class='nav-item')
+            a(class='nav-link' href='#') Filter
+          
+          form(class='d-flex')
+            input(class="form-control me-2" type="search" placeholder="Search" aria-label="Search")
+            button(class="btn btn-outline-light" type="submit") Search
+          ul(class="nav-item dropdown")
+            a(class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false") #{user.name}
+            ul(class="dropdown-menu" aria-labelledby="navbarDropdown")
+              li
+                a(class="dropdown-item" href="http://127.0.0.1:3000/profile" ) Account
+              li
+                a(href="#" class="dropdown-item") My Listings  
+              li
+                a(href="#" class="dropdown-item") My Cart
+              li
+                a(href="#" class="dropdown-item") My WishList
+              li
+                a(href="#" class="dropdown-item") Personal Information
+              li
+                hr(class="dropdown-divider")
+              li
+                a(class="dropdown-item" href="http://127.0.0.1:3000/api/v1/user/logout" ) Logout
+  div(class="container")
+    div(class="row mb-4")
+      p Popular Tags:
+      div(class="col-12")
+        button(type="button" class="btn btn-outline-primary me-2") Tech
+        button(type="button" class="btn btn-outline-primary me-2") Furniture
+        button(type="button" class="btn btn-outline-primary me-2") Pet
+    div(class="row")
+      each listing  in listings
+        div(class="col-4")
+          div(class='card border-dark mb-4')
+            img(class="card-img-top" src='./img/CSU_Logo.png' alt='Image Place')
+            div(class="card-body")
+              h5(class="card-title") #{listing.title}
+              p(class="card-text") Tags:
+                each tag in listing.tag
+                  span(class="badge bg-light text-dark me-1") #{tag}
+              p(class="card-text") $#{listing.price}
+              a(href=`http://127.0.0.1:3000/api/v1/user/${listing.belongTo}` class="btn btn-secondary") Contact Seller
+          
   
-link(rel='stylesheet' href='./css/homestyle.css')
+link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous")
+script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous")
+//- link(rel='stylesheet' href='./css/homestyle.css')

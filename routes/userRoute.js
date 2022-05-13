@@ -10,7 +10,6 @@ router.route("/logout").get(authenController.logout);
 router
   .route("/updatepassword")
   .patch(authenController.protect, authenController.updatePassword);
-
-router.route("/").get(authenController.protect, userController.getUser);
+router.route("/:id").get(userController.getUser);
 
 module.exports = router;
